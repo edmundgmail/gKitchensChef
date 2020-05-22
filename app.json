@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "gKitchensChef",
+    "slug": "gKitchensChef",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.expofirebaseauth",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.577396476997-23jn7uqchf7bd7605liqvscl3s6c1gui"
+        }
+      }
+    },
+    "android": {
+      "package": "com.expofirebaseauth",
+      "googleServicesFile": "./google-services.json"
+  }
+  }
+}
