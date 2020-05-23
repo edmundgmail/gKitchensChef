@@ -14,7 +14,7 @@ export default function MenuScreen({navigation}) {
     size={50}
     style={styles.navButton}
     color='#6646ee'
-    onPress={() => navigation.navigate('AddMenu')}
+    onPress={() => navigation.navigate('Add Menu')}
       />
     </View>
   );

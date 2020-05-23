@@ -19,7 +19,7 @@ export default function HomeStack() {
     >
       <Stack.Screen name='Home' component={HomeScreen}/>
       <Stack.Screen name='Menu' component={MenuScreen} />
-      <Stack.Screen name='AddMenu' component={AddMenuScreen} />
+      <Stack.Screen name='Add Menu' component={AddMenuScreen} />
       <Stack.Screen name='Settings' component={SettingsScreen} />
     </Stack.Navigator>
   );
