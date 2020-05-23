@@ -4,20 +4,11 @@ import { Title } from 'react-native-paper';
 import { AuthContext } from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
 
-export default function HomeScreen({navigation}) {
-  const { user, logout } = useContext(AuthContext);
+export default function MenuScreen() {
 
   return (
     <View style={styles.container}>
-    <Title>Home Screen</Title>
-    <FormButton
-      modeValue='contained'
-      title='Manage menu'
-      onPress={() => navigation.navigate('Menu')}
-      />
-
-  
-      
+    <Title>Menu Screen</Title>
     </View>
   );
 }

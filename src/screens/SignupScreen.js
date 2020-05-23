@@ -6,13 +6,23 @@ import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 
 export default function SignupScreen({ navigation }) {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { register } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
-      <Title style={styles.titleText}>Register to chat</Title>
+      <Title style={styles.titleText}>Register to gKitchens</Title>
+
+      <FormInput
+        labelName='Display Name'
+        value={username}
+        autoCapitalize='none'
+        onChangeText={username => setUsername(username)}
+      />
+
+
       <FormInput
         labelName='Email'
         value={email}
@@ -29,8 +39,8 @@ export default function SignupScreen({ navigation }) {
         title='Signup'
         modeValue='contained'
         labelStyle={styles.loginButtonLabel}
-        onPress={() => register(email, password)}
-      />
+        onPress={() => register(email, password, username)}
+      />    
       <IconButton
         icon='keyboard-backspace'
         size={30}
