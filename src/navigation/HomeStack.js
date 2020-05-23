@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
+import AddMenuScreen from '../screens/AddMenuScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import SettingsIcon from '../components/SettingsIcon';
 
@@ -18,6 +19,7 @@ export default function HomeStack() {
     >
       <Stack.Screen name='Home' component={HomeScreen}/>
       <Stack.Screen name='Menu' component={MenuScreen} />
+      <Stack.Screen name='AddMenu' component={AddMenuScreen} />
       <Stack.Screen name='Settings' component={SettingsScreen} />
     </Stack.Navigator>
   );
