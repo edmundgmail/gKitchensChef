@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { Title } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import { IconButton } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import FormButton from '../components/FormButton';
@@ -58,13 +58,17 @@ export default function AddMenuScreen({navigation}) {
           autoCapitalize='none'
           onChangeText={name => setName(name)}
         />
-    <IconButton
+
+<View style={styles.row}>
+          <Text style={styles.label}>Picture</Text>
+          <IconButton
     icon='camera'
     size={30}
     style={styles.navButton}
     color='#6646ee'
     onPress={() => takeImage()}
       />
+          
     <IconButton
     icon='attachment'
     size={30}
@@ -72,6 +76,8 @@ export default function AddMenuScreen({navigation}) {
     color='#6646ee'
     onPress={() => pickImage()}
       />      
+      </View>
+
     {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
     <FormInputMulti
           labelName='Description'
@@ -99,5 +105,18 @@ const styles = StyleSheet.create({
   },
   navButton: {
     marginTop: 10
-  }
+  },
+  label: {
+    fontSize: 22
+  },
+  row: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  inputWrap: {
+    flex: 1,
+    borderColor: "#cccccc",
+    borderBottomWidth: 1,
+    marginBottom: 10
+  },
 });

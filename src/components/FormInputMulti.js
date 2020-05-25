@@ -9,6 +9,7 @@ export default function FormInputMulti({ labelName, ...rest }) {
       <TextInput
         label={labelName}
         style={styles.input}
+        multiline={true}
         numberOfLines={5}
         {...rest}
       />
@@ -20,6 +21,6 @@ export default function FormInputMulti({ labelName, ...rest }) {
       marginTop: 10,
       marginBottom: 10,
       width: width / 1.5,
-      height: height / 15
+      height: height / 3
     }
   });
