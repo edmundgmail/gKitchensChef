@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import FormInputMulti from '../components/FormInputMulti';
-
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 export default function AddMenuScreen({navigation}) {
 
@@ -14,6 +14,8 @@ export default function AddMenuScreen({navigation}) {
   const [name, setName] = useState('')
   const [desc, setDesc] = useState('')
   const [price, setPrice] = useState(0)
+
+  const LeftContent = () =>  <FormInput labelName='Menu Name' value={name} autoCapitalize='none'  onChangeText={name => setName(name)} />
 
   const pickImage = async () => {
     try {
@@ -50,73 +52,58 @@ export default function AddMenuScreen({navigation}) {
       alert("save menu")
   }
 
+
   return (
     <View style={styles.container}>
-        <FormInput
+          <FormInput
           labelName='Name'
           value={name}
           autoCapitalize='none'
           onChangeText={name => setName(name)}
         />
-
-<View style={styles.row}>
-          <Text style={styles.label}>Picture</Text>
-          <IconButton
-    icon='camera'
-    size={30}
-    style={styles.navButton}
-    color='#6646ee'
-    onPress={() => takeImage()}
-      />
-          
-    <IconButton
-    icon='attachment'
-    size={30}
-    style={styles.navButton}
-    color='#6646ee'
-    onPress={() => pickImage()}
-      />      
-      </View>
-
-    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-    <FormInputMulti
+          <FormInput
+          labelName='Price'
+          value={name}
+          autoCapitalize='none'
+          onChangeText={price => setPrice(price)}
+        />
+  <FormInputMulti
           labelName='Description'
           value={desc}
           autoCapitalize='none'
           onChangeText={desc => setDesc(desc)}
         />
 
-    <FormButton
-      modeValue='contained'
-      title='Save'
-      onPress={() => saveMenu()}
-      />
-    </View>
+    <Button onPress={pickImage}>
+      <View>
+        {image === null ? (
+          <Text>Select a Photo</Text>
+        ) : (
+          <Image source={image} />
+        )}
+      </View>
+    </Button>
+  </View>
   );
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f5f5f5',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  navButton: {
-    marginTop: 10
-  },
-  label: {
-    fontSize: 22
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  inputWrap: {
-    flex: 1,
-    borderColor: "#cccccc",
-    borderBottomWidth: 1,
-    marginBottom: 10
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+      },
+      avatarContainer: {
+        borderColor: '#9B9B9B',
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      avatar: {
+        borderRadius: 75,
+        width: 150,
+        height: 150,
+      },
 });
