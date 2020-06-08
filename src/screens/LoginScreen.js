@@ -14,12 +14,14 @@ export default function Login({ navigation }) {
       <View style={styles.container}>
         <Title style={styles.titleText}>Welcome to gKitchens</Title>
         <FormInput
+          category="login"
           labelName='Email'
           value={email}
           autoCapitalize='none'
           onChangeText={userEmail => setEmail(userEmail)}
         />
         <FormInput
+          category="login"
           labelName='Password'
           value={password}
           secureTextEntry={true}

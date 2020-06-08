@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
 import { IconButton } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import FormInputMulti from '../components/FormInputMulti';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { AuthContext } from '../navigation/AuthProvider';
+import {db} from '../config';
+import { userInfo } from 'os';
 
 export default function AddMenuScreen({navigation}) {
+  const { user} = useContext(AuthContext);
 
   const [image, setImage] = useState(null)
   const [name, setName] = useState('')
   const [desc, setDesc] = useState('')
-  const [price, setPrice] = useState(0)
-
-  const LeftContent = () =>  <FormInput labelName='Menu Name' value={name} autoCapitalize='none'  onChangeText={name => setName(name)} />
+  const [price, setPrice] = useState('0')
 
   const pickImage = async () => {
     try {
@@ -24,12 +24,12 @@ export default function AddMenuScreen({navigation}) {
             setImage(result.uri)
         }
         console.log(result);
-    } catch (e) {
+    } catch (e) {   
         console.log(e);
     }
   };
 
-  const takeImage = async () => {
+  /*const takeImage = async () => {
     try {
         let result = await ImagePicker.launchCameraAsync();
         if (!result.cancelled) {
@@ -39,7 +39,7 @@ export default function AddMenuScreen({navigation}) {
     } catch (e) {
         console.log(e);
     }
-  };
+  };*/
     
   const uploadImage = async(uri) => {
     const response = await fetch(uri);
@@ -49,6 +49,13 @@ export default function AddMenuScreen({navigation}) {
   };
 
   const saveMenu = async() => {
+      console.log(user.uid)
+      db.ref(`/menus-${user.uid}`).push({
+            name: {name},
+            price: {price},
+            desc: {desc},
+            image: {image}
+      });
       alert("save menu")
   }
 
@@ -56,14 +63,16 @@ export default function AddMenuScreen({navigation}) {
   return (
     <View style={styles.container}>
           <FormInput
+          category="form"  
           labelName='Name'
           value={name}
           autoCapitalize='none'
           onChangeText={name => setName(name)}
         />
           <FormInput
+          category="form"  
           labelName='Price'
-          value={name}
+          value={price}
           autoCapitalize='none'
           onChangeText={price => setPrice(price)}
         />
@@ -74,15 +83,22 @@ export default function AddMenuScreen({navigation}) {
           onChangeText={desc => setDesc(desc)}
         />
 
-    <Button onPress={pickImage}>
-      <View>
-        {image === null ? (
-          <Text>Select a Photo</Text>
-        ) : (
-          <Image source={image} />
-        )}
-      </View>
-    </Button>
+
+    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    <IconButton
+    icon='camera'
+    size={30}
+    style={styles.navButton}
+    color='#6646ee'
+    onPress={pickImage}
+      />
+
+    <FormButton
+      modeValue='contained'
+      title='Submit'
+      onPress={() => saveMenu()}
+     />
+
   </View>
   );
 
@@ -94,16 +110,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-      },
-      avatarContainer: {
-        borderColor: '#9B9B9B',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      avatar: {
-        borderRadius: 75,
-        width: 150,
-        height: 150,
-      },
+      }
 });

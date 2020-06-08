@@ -16,6 +16,7 @@ export default function SignupScreen({ navigation }) {
       <Title style={styles.titleText}>Register to gKitchens</Title>
 
       <FormInput
+        category="login"
         labelName='Display Name'
         value={username}
         autoCapitalize='none'
@@ -24,12 +25,14 @@ export default function SignupScreen({ navigation }) {
 
 
       <FormInput
+        category="login"
         labelName='Email'
         value={email}
         autoCapitalize='none'
         onChangeText={userEmail => setEmail(userEmail)}
       />
       <FormInput
+        category="login"
         labelName='Password'
         value={password}
         secureTextEntry={true}

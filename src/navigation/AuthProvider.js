@@ -15,7 +15,8 @@ export const AuthProvider = ({ children }) => {
           setUser,
           login: async (email, password) => {
             try {
-              await firebase.auth().signInWithEmailAndPassword(email, password);
+              let userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+              console.log(userCredential.user);
             } catch (e) {
               console.log(e);
             }
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
             try {
               let userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
               await userCredential.user.updateProfile({displayName: username});
+              await userCredential.user.setCustomUserClaims(userCredential.user.uid, {role: "owner"});
             } catch (e) {
               console.log(e);
             }
